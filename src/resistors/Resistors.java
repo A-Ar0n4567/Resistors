@@ -26,7 +26,9 @@ public class Resistors {
         
         //Color, Code
         String colorCodes[][] = new String[10][10];
-        
+        //stores the corrisponding number of the band color
+        ArrayList<Double> output = new ArrayList();
+        //2d array holds band color and number
         colorCodes[0][0] = "black";
         colorCodes[0][1] = "0";
         colorCodes[1][0] = "Brown";
@@ -47,23 +49,26 @@ public class Resistors {
         colorCodes[8][1] = "8";
         colorCodes[9][0] = "White";
         colorCodes[9][1] = "9";
-        
-        input = JOptionPane.showInputDialog("Enter the color code of your resistor separated only by spaces");
-        
+        //input box
+        input = JOptionPane.showInputDialog("Enter the color code of your resistor separated only by spaces with the first letter capitalized");
+        //splits the input string into individual words
         codes = input.split(" ");
-        
+        //runs through the bands inputed and writes to console
         for( int i = 0; i < codes.length; i++){
             System.out.println(codes[i]);
-            
-            for( int k = 0; k < 10; k++){
-                if(codes[k].equals(colorCodes[k][0])){
-                 
-                    System.out.println("The code is "+colorCodes[k][1]);
+            //tests each band to see if it matches against the colorCodes array
+            for( int k = 0; k < colorCodes.length; k++){
+                if(codes[i].equals(colorCodes[k][0])){
+                    //adds the int value of the colorCodes array to the output array list
+                    output.add(Double.parseDouble(colorCodes[k][1]));
                 }else{
-                    System.out.println("oof dog");
+                    
                 }
             }
         }
+        System.out.println("output: "+output);
+        //prints and calculates the total resistance
+        System.out.println("The resistor is "+ Math.pow(output.get(0)*output.get(1), output.get(2)) + " Ohms");
     }
     
 }
